@@ -1,0 +1,33 @@
+def longest_unique_word_sequence(words: list[list[str]]) -> tuple:
+    #your code here
+    flat_list = []
+    for i in words:
+        for j in i:
+            flat_list.append(j)
+    
+    start = 0
+    seen = set()
+    max_len = 0
+    result = []
+
+    for end in range(len(flat_list)):
+        while flat_list[end] in seen:
+            seen.remove(flat_list[start])
+            start += 1
+        seen.add(flat_list[end])
+        
+        current_length = end - start + 1
+        if current_length > max_len:
+            max_len = current_length
+            result = [flat_list[start:end + 1]]
+        elif current_length == max_len:
+            result.append(flat_list[start:end + 1])
+    return max_len, result
+
+words = [["apple", "banana"], ["apple"], ["cherry", "banana"]]
+print(longest_unique_word_sequence(words))
+# ผลลัพธ์: (3, [['banana', 'apple', 'cherry'], ['apple', 'cherry', 'banana']])
+
+words2 = [["dog", "cat"], ["mouse", "cat"], ["bird", "dog"]]
+print(longest_unique_word_sequence(words2))
+# ผลลัพธ์: (4, [['mouse', 'cat', 'bird', 'dog']])
