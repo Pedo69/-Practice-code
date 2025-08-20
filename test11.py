@@ -1,5 +1,4 @@
 def find_repeated_substrings(s: str) -> list:
-    sub = []
     seen = set()
     repeated = set()
 
@@ -11,18 +10,16 @@ def find_repeated_substrings(s: str) -> list:
                     repeated.add(sub)
                 else:
                     seen.add(sub)
-    return repeated
+    
+    # return as sorted list for consistent results
+    return sorted(repeated, key=lambda x: (len(x), x))
 
 
 print(find_repeated_substrings("banana"))
-# Output: ['an', 'ana', 'na']
+# ['an', 'na', 'ana']
 
 print(find_repeated_substrings("abcdefg"))
-# Output: []
+# []
 
 print(find_repeated_substrings("abcabcabc"))
-# Output: ['ab', 'abc', 'abca', 'abcab', 'abcabc', 'bc', 'bca', 'bcab',
-#          'bcabc', 'ca', 'cab', 'cabc']
-
-print(find_repeated_substrings("aaaa"))
-# Output: ['aa', 'aaa ']
+# ['ab', 'bc', 'ca', 'abc', 'bca', 'cab', 'abca', 'bcab', 'cabc', 'abcab', 'b]()
